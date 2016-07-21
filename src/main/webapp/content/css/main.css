@@ -16,6 +16,7 @@ Developement Ribbon
 ========================================================================== */
 .ribbon {
     background-color: #a00;
+    opacity: 0.5;
     box-shadow: 0 0 10px #888;
     left: -3.5em;
     moz-box-shadow: 0 0 10px #888;

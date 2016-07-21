@@ -1,12 +1,18 @@
-![Logo](src/main/webapp/content/images/Bottlestore15.png)
+![Logo](src/main/webapp/content/images/bottlestore15.png)
 # jbottlestore App
 
 This application was generated using JHipster, you can find documentation and help at [https://jhipster.github.io](https://jhipster.github.io).
 
 As described on JHipster call these commands
- - npm install -g yo
- - npm install -g generator-jhipster
- - yo jhipster
+
+	npm install -g yo
+	npm install -g generator-jhipster
+	yo jhipster
+
+In Addition [JHipster Entity Audit][]
+
+	npm install -g generator-jhipster-entity-audit
+	yo jhipster-entity-audit
 
 
 ## Development
@@ -83,3 +89,5 @@ To setup this project in Jenkins, use the following configuration:
 [Karma]: http://karma-runner.github.io/
 [Jasmine]: http://jasmine.github.io/2.0/introduction.html
 [Protractor]: https://angular.github.io/protractor/
+[JHipster Entity Audit]: https://www.npmjs.com/package/generator-jhipster-entity-audit/
+[MarkdownCheatsheet]: https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet/
