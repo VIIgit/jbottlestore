@@ -1,0 +1,13 @@
+version: '2'
+services:
+    jbottlestore-mariadb:
+        container_name: jbottlestore-mariadb
+        image: mariadb:10.1.14
+        # volumes:
+        #     - ~/volumes/jhipster/jbottlestore/mysql/:/var/lib/mysql/
+        environment:
+            - MYSQL_USER=root
+            - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+            - MYSQL_DATABASE=jbottlestore
+        ports:
+            - 3306:3306
