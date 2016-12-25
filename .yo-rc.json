@@ -1,18 +1,18 @@
 {
   "generator-jhipster": {
-    "jhipsterVersion": "3.5.0",
+    "jhipsterVersion": "3.12.2",
     "baseName": "jbottlestore",
     "packageName": "ch.vii",
     "packageFolder": "ch/vii",
     "serverPort": "8080",
     "authenticationType": "session",
     "hibernateCache": "ehcache",
-    "clusteredHttpSession": "no",
+    "clusteredHttpSession": false,
     "websocket": "spring-websocket",
     "databaseType": "sql",
     "devDatabaseType": "h2Disk",
     "prodDatabaseType": "mariadb",
-    "searchEngine": "no",
+    "searchEngine": false,
     "buildTool": "maven",
     "enableSocialSignIn": true,
     "rememberMeKey": "b4a7bb28881cfaba0f0e19b0a5403a85747d4e6e",
@@ -28,6 +28,8 @@
     "languages": [
       "de",
       "en"
-    ]
+    ],
+    "messageBroker": false,
+    "serviceDiscoveryType": false
   }
 }

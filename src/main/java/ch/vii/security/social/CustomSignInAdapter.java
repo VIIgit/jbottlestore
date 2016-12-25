@@ -27,7 +27,6 @@ public class CustomSignInAdapter implements SignInAdapter {
     @Inject
     private JHipsterProperties jHipsterProperties;
 
-
     @Override
     public String signIn(String userId, Connection<?> connection, NativeWebRequest request) {
         UserDetails user = userDetailsService.loadUserByUsername(userId);

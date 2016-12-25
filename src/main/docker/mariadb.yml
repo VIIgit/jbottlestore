@@ -2,7 +2,7 @@ version: '2'
 services:
     jbottlestore-mariadb:
         container_name: jbottlestore-mariadb
-        image: mariadb:10.1.14
+        image: mariadb:10.1.17
         # volumes:
         #     - ~/volumes/jhipster/jbottlestore/mysql/:/var/lib/mysql/
         environment:
@@ -11,3 +11,4 @@ services:
             - MYSQL_DATABASE=jbottlestore
         ports:
             - 3306:3306
+        command: mysqld --lower_case_table_names=1 --skip-ssl

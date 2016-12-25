@@ -33,6 +33,13 @@ public class CustomAuditEventRepository implements AuditEventRepository {
     private AuditEventConverter auditEventConverter;
 
     @Override
+    public List<AuditEvent> find(Date after) {
+        Iterable<PersistentAuditEvent> persistentAuditEvents =
+            persistenceAuditEventRepository.findByAuditEventDateAfter(LocalDateTime.from(after.toInstant()));
+        return auditEventConverter.convertToAuditEvent(persistentAuditEvents);
+    }
+
+    @Override
     public List<AuditEvent> find(String principal, Date after) {
         Iterable<PersistentAuditEvent> persistentAuditEvents;
         if (principal == null && after == null) {
@@ -47,10 +54,17 @@ public class CustomAuditEventRepository implements AuditEventRepository {
     }
 
     @Override
+    public List<AuditEvent> find(String principal, Date after, String type) {
+        Iterable<PersistentAuditEvent> persistentAuditEvents =
+            persistenceAuditEventRepository.findByPrincipalAndAuditEventDateAfterAndAuditEventType(principal, LocalDateTime.from(after.toInstant()), type);
+        return auditEventConverter.convertToAuditEvent(persistentAuditEvents);
+    }
+
+    @Override
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void add(AuditEvent event) {
         if (!AUTHORIZATION_FAILURE.equals(event.getType()) &&
-            !ANONYMOUS_USER.equals(event.getPrincipal().toString())) {
+            !ANONYMOUS_USER.equals(event.getPrincipal())) {
 
             PersistentAuditEvent persistentAuditEvent = new PersistentAuditEvent();
             persistentAuditEvent.setPrincipal(event.getPrincipal());

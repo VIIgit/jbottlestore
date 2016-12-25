@@ -12,6 +12,9 @@
 
 
 spring:
+    profiles:
+        active: dev
+        include: swagger
     devtools:
         restart:
             enabled: true
@@ -20,6 +23,7 @@ spring:
     jackson:
         serialization.indent_output: true
     datasource:
+        type: com.zaxxer.hikari.HikariDataSource
         url: jdbc:h2:file:./target/h2db/db/jbottlestore;DB_CLOSE_DELAY=-1
         name:
         username: jbottlestore
@@ -35,7 +39,12 @@ spring:
             hibernate.cache.use_second_level_cache: true
             hibernate.cache.use_query_cache: false
             hibernate.generate_statistics: true
-            hibernate.cache.region.factory_class: org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory
+            hibernate.javax.cache.provider: org.ehcache.jsr107.EhcacheCachingProvider
+            hibernate.javax.cache.uri: ${spring.cache.jcache.config}
+            hibernate.cache.region.factory_class: ch.vii.config.jcache.SpringCacheRegionFactory
+    cache:
+        jcache:
+            config: ehcache.xml
     mail:
         host: localhost
         port: 25
@@ -45,8 +54,6 @@ spring:
         cache-seconds: 1
     thymeleaf:
         cache: false
-    profiles:
-        include: swagger # automatically set the 'swagger' profile
 
 liquibase:
     contexts: dev
@@ -60,7 +67,6 @@ server:
 
 jhipster:
     cache: # Hibernate 2nd level cache, used by CacheConfiguration
-        timeToLiveSeconds: 3600
         ehcache:
             maxBytesLocalHeap: 16M
     security:
@@ -69,17 +75,17 @@ jhipster:
             key: b4a7bb28881cfaba0f0e19b0a5403a85747d4e6e
     mail: # specific JHipster mail property, for standard properties see MailProperties
         from: jbottlestore@localhost
+        baseUrl: http://127.0.0.1:8080
     metrics: # DropWizard Metrics configuration, used by MetricsConfiguration
         jmx.enabled: true
-        spark:
-            enabled: false
-            host: localhost
-            port: 9999
         graphite:
             enabled: false
             host: localhost
             port: 2003
             prefix: jbottlestore
+        prometheus:
+            enabled: false
+            endpoint: /prometheusMetrics
         logs: # Reports Dropwizard metrics in the logs
             enabled: false
             reportFrequency: 60 # in seconds
